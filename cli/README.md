@@ -155,7 +155,7 @@ What is the name of the item? Second hand headphones
 Amount available: 8
 Location: Both warehouses
 Maximum availability: 4 in Warehouse 1
-
+# Thank the user for the visit
 Would you like to order this item?(y/n) y
 How many would you like? 10
 **************************************************
