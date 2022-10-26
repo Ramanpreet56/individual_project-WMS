@@ -7,9 +7,13 @@ for item in warehouse1:
     # The `item` name will contain each of the strings (item names) in the list.
 """
 
-from data import warehouse1, warehouse2
+from cli.data import warehouse1, warehouse2
+import time
 
 # YOUR CODE STARTS HERE
+
+
+
 
 # Get the user name
 
