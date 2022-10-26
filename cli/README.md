@@ -90,8 +90,8 @@ Items in warehouse 2:
 - Almost new router
 - High quality monitor
 
-Thank you for your visit, Mathilda!
-```
+Thank you for your visit, Mathilda!else: 
+        print(item,'was not found')
 **Search & found in 1 location, no order**
 
 ```

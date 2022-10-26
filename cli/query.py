@@ -32,11 +32,31 @@ if menu not in [1,2,3]:
     print('Invalid input')
 
 # If they pick 1
+def item_count(item , warehouse):
+    count = 0
+    for x in warehouse:
+        if item == x:
+            count = count+1
+    return count
+
+
 def item_search():
     item=input('Choose an item: ')
     
     if item in warehouse1 or item in warehouse2:
         print(item,'was found')
+        count_warehouse1 = item_count(item,warehouse1)
+        count_warehouse2 = item_count(item,warehouse2)
+
+        if count_warehouse1 > 0 and count_warehouse2 >0 :
+            print('Amount available: ',count_warehouse1+count_warehouse2)
+            print('Location: warehouse1 and warehouse2')
+        elif count_warehouse1 == 0 and count_warehouse2 >0 :
+            print('Amount available: ',count_warehouse1+count_warehouse2)
+            print('Location: warehouse2')
+        elif count_warehouse1 > 0 and count_warehouse2 == 0 :
+            print('Amount available: ',count_warehouse1+count_warehouse2)
+            print('Location: warehouse1')
 # Thank the user for the visit
         buyout_decision = input('proceed to buy? Enter y for buying or n for exit:  ')
         if buyout_decision == 'y':
@@ -47,6 +67,10 @@ def item_search():
             print('Please enter y or n')
     else: 
         print(item,'was not found')
+
+
+
+
 
 
 
