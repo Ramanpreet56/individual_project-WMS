@@ -57,6 +57,10 @@ def item_search():
         elif count_warehouse1 > 0 and count_warehouse2 == 0 :
             print('Amount available: ',count_warehouse1+count_warehouse2)
             print('Location: warehouse1')
+        order=int(input('How many items you want to order?  '))
+        if order > count_warehouse1+count_warehouse2:
+            print('There are not this many available. The maximum amount that can be ordered is ',count_warehouse1+count_warehouse2)
+          
 # Thank the user for the visit
         buyout_decision = input('proceed to buy? Enter y for buying or n for exit:  ')
         if buyout_decision == 'y':
