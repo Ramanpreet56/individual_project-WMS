@@ -7,29 +7,34 @@ for item in warehouse1:
     # The `item` name will contain each of the strings (item names) in the list.
 """
 
+from ast import Break
 from data import warehouse1, warehouse2
 import time
+
 
 # YOUR CODE STARTS HERE
 
 print('')
+
 print('WMS- Warehouse management system')
 print('-')
 
 # Get the user name
 user_name = input('Please provide your name:  ')
 print('')
+
+
 # Greet the user
 
 print('welcome',user_name)
 
 
 # Show the menu and ask to pick a choice
-
-print(user_name,'Please choose an option: \n- 1.List items by warehouse \n- 2.Search an item and place an order \n- 3.Quit\n \n:')
+print('')
+print('\n' '\n' ,user_name,'Please choose an option: \n- 1.List items by warehouse. \n- 2.Search an item and place an order.\n- 3.Quit..\n \n:')
 menu=int(input('Enter 1 ,2 or 3 :'))
-if menu not in [1,2,3]:
-    print('Invalid input')
+
+
 
 # If they pick 1
 def item_count(item , warehouse):
@@ -39,9 +44,38 @@ def item_count(item , warehouse):
             count = count+1
     return count
 
+def print_list(list):
+    for x in list:
+        print(x,'\n')
+
+def final_decision():
+    opt = input('You do want to add something?Enter y or n:  ')
+    if opt == 'y':
+        item_search()
+    elif opt == 'n':
+        print('you are not choosing any other item...')
+    else:
+        print('please choose y or n')
+        final_decision()
+
+
+
+
+def decision():
+                buyout_decision = input('proceed to buy? Enter y for buying or n for exit:  ')
+                if buyout_decision == 'y':
+                    
+                    print('Thank you for choosing us..your order is placed..', user_name ,'!')
+                    
+                    
+                    final_decision()           
+                elif buyout_decision =='n':
+                    print('Thank you for your visit',user_name)
+                else:
+                    print('Please enter y or n')
 
 def item_search():
-    item=input('Choose an item: ')
+    item= str.capitalize(input('Choose an item: '))
     
     if item in warehouse1 or item in warehouse2:
         print(item,'was found')
@@ -60,37 +94,52 @@ def item_search():
         order=int(input('How many items you want to order?  '))
         if order > count_warehouse1+count_warehouse2:
             print('There are not this many available. The maximum amount that can be ordered is ',count_warehouse1+count_warehouse2)
+            decision()
+            final_decision()
+        elif order <= count_warehouse1+count_warehouse2:
+            print('You are choosing:  ', item)
+            decision()
+
+
           
 # Thank the user for the visit
-        buyout_decision = input('proceed to buy? Enter y for buying or n for exit:  ')
-        if buyout_decision == 'y':
-            print('Thank you and visit us again',user_name)
-        elif buyout_decision =='n':
-            print('Thank you for your visit',user_name)
-        else:
-            print('Please enter y or n')
+            
     else: 
-        print(item,'was not found')
-
-
-
-
-
+        print(item,'was not found,try again...')
+        item_search()
+        
 
 
 if menu == 1:
-    print('The items in warehouse1 are:     ', warehouse1)
+    print('The items in warehouse1 are:     ','\n')
+    print_list(set(warehouse1))
     print('')
-    print('The items in warehouse2 are:     ',warehouse2)
-    item_search()
+    print('The items in warehouse2 are:     ','\n')
+    print_list(set(warehouse2))
+    print('')
+    print('**********************')
+    print('**\n****',user_name,'!..' 'Please choose an option: \n- 2.Search an item and place an order.\n- 3.Quit..\n \n:')
+    menu=int(input('Enter 2 or 3 :'))
+    if menu == 2 and 3:
+        item_search()
+    if menu not in [2,3]:
+        print('you are choosing wrong option')
+    
+    
 # Else, if they pick 2
 
 elif menu == 2:
-   item_search()
+    print('choose an item and place an order', user_name)
+    item_search()
 
 # Else, if they pick 3
 elif menu == 3: 
-    print('')
+    print('Thank you for your visit,', user_name,'!')
+
+else:
+    print('Invalid input')
+
+
         
 
     
