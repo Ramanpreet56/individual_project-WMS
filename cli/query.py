@@ -6,11 +6,12 @@ for item in warehouse1:
     # Your instructions here.
     # The `item` name will contain each of the strings (item names) in the list.
 """
+import sys
 
-from ast import Break
-from data import warehouse1, warehouse2
+
+#from data import stock
+from data import warehouse1 ,warehouse2
 import time
-
 
 # YOUR CODE STARTS HERE
 
@@ -37,15 +38,15 @@ menu=int(input('Enter 1 ,2 or 3 :'))
 
 
 # If they pick 1
-def item_count(item , warehouse):
+def item_count(item: str , warehouse: list) -> int: 
     count = 0
     for x in warehouse:
         if item == x:
             count = count+1
     return count
 
-def print_list(list):
-    for x in list:
+def print_list(list1: set) -> None:
+    for x in list1:
         print(x,'\n')
 
 def final_decision():
@@ -53,7 +54,7 @@ def final_decision():
     if opt == 'y':
         item_search()
     elif opt == 'n':
-        print('you are not choosing any other item...')
+        print('you are not choosing any other item...Thank you :)')
     else:
         print('please choose y or n')
         final_decision()
@@ -73,6 +74,7 @@ def decision():
                     print('Thank you for your visit',user_name)
                 else:
                     print('Please enter y or n')
+                    decision()
 
 def item_search():
     item= str.capitalize(input('Choose an item: '))
@@ -108,16 +110,16 @@ def item_search():
         print(item,'was not found,try again...')
         item_search()
         
-
-
 if menu == 1:
     print('The items in warehouse1 are:     ','\n')
     print_list(set(warehouse1))
     print('')
+    print('*******************************************************************************')
+    print('')
     print('The items in warehouse2 are:     ','\n')
     print_list(set(warehouse2))
     print('')
-    print('**********************')
+    print('********************************************************************************')
     print('**\n****',user_name,'!..' 'Please choose an option: \n- 2.Search an item and place an order.\n- 3.Quit..\n \n:')
     menu=int(input('Enter 2 or 3 :'))
     if menu == 2 and 3:
@@ -134,7 +136,7 @@ elif menu == 2:
 
 # Else, if they pick 3
 elif menu == 3: 
-    print('Thank you for your visit,', user_name,'!')
+    print('Thank you for your visit,', user_name+'!')
 
 else:
     print('Invalid input')
