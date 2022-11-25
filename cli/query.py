@@ -9,8 +9,8 @@ for item in warehouse1:
 import sys
 
 
-#from data import stock
-from data import warehouse1 ,warehouse2
+from data import stock
+# from data import warehouse1 ,warehouse2
 import time
 
 # YOUR CODE STARTS HERE
@@ -75,10 +75,7 @@ def decision():
                 else:
                     print('Please enter y or n')
                     decision()
-
-def item_search():
-    item= str.capitalize(input('Choose an item: '))
-    
+edd7fee3455ff2fe63b3f14bfe8f489177cbef3e
     if item in warehouse1 or item in warehouse2:
         print(item,'was found')
         count_warehouse1 = item_count(item,warehouse1)
