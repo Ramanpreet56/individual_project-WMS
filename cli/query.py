@@ -8,7 +8,7 @@ for item in warehouse1:
 """
 import sys
 import collections
-
+from itertools import zip_longest
 from data import stock
 
 import time
@@ -44,7 +44,7 @@ while not menus.isnumeric():
     menus = input('wrong entry: please enter 1,2,3,4')
 menu = int(menus)
 
-
+####for menu1
 def menu1():
     total_item_in1 = []
     print('warehouse1')
@@ -65,7 +65,7 @@ def menu1():
     if menu == 2:
         menu2()
     elif menu == 3:
-        search_category()
+        menu3()
     elif menu ==4:
         print('Thank you for your Visit',user_name+'!')
     if menu not in [2,3,4]:
@@ -73,7 +73,7 @@ def menu1():
 
 
 
-
+#if customer want to add something
 def final_decision():
     opt = input('You do want to add something?Enter y or n:  ')
     if opt == 'y':
@@ -84,6 +84,7 @@ def final_decision():
         print('please choose y or n')
         final_decision()
 
+#if customer want to purchase the item or not
 def decision():
     buyout_decision = input('proceed to buy? Enter y for buying or n for exit:  ')
     if buyout_decision == 'y':
@@ -97,7 +98,7 @@ def decision():
         decision()
 
 
-
+#for menu 2
 def menu2():
     item_name = input('choose an item:   ')
     warehouse1 = []
@@ -155,47 +156,66 @@ def menu2():
 
   
 
-
-def search_category():
+#for menu 3
+# def search_category():
     
-    categories = {1:"Keyboard",2:"Smartphone",3:"Mouse",4:"Laptop",5:"Headphones",6:"Monitor",7:"Router",8:"Tablet"}
-    temp = []
-    for i in stock:
-        counter1 = 0
-        for b in categories:
-            counter1 += 1
-            if i["category"] in categories[counter1]:
-                temp.append(counter1)           
-    counter = 1
-    for i in categories:
-        print(f"{i}. {categories[i]} ({temp.count(counter)})")
-        counter += 1
-    menu_category = int(input("Type the number of the category to browse or press 42 to quit: "))
-    if menu_category in range(1,9):
-        for i in stock:
-            if categories[int(menu_category)] == i["category"]:
-                print(i["state"], i["category"],", Warehouse", i["warehouse"])
-    elif menu_category == "42":
-        pass          
-
-# def menu3():
 #     categories = {1:"Keyboard",2:"Smartphone",3:"Mouse",4:"Laptop",5:"Headphones",6:"Monitor",7:"Router",8:"Tablet"}
-#     category_list = [item['category'] for item in stock]
-#     category_counter = collections.Counter(category_list)
-#     print(category_list)
-#     print(category_counter)
+#     temp = []
+#     for i in stock:
+#         counter1 = 0
+#         for b in categories:
+#             counter1 += 1
+#             if i["category"] in categories[counter1]:
+#                 temp.append(counter1)           
+#     counter = 1
+#     for i in categories:
+#         print(f"{i}. {categories[i]} ({temp.count(counter)})")
+#         counter += 1
+#     menu_category = int(input("Type the number of the category to browse or press 42 to quit: "))
+#     if menu_category in range(1,9):
+#         for i in stock:
+#             if categories[int(menu_category)] == i["category"]:
+#                 print(i["state"], i["category"],", Warehouse", i["warehouse"])
+#     elif menu_category == "42":
+#         pass          
+
+def menu3():
+    #categories = {1:"Keyboard",2:"Smartphone",3:"Mouse",4:"Laptop",5:"Headphones",6:"Monitor",7:"Router",8:"Tablet"}
+    category_list = [item['category'] for item in stock]
+    category_counter = collections.Counter(category_list)
+    cat_D = {id: f"{category} ({category_counter[category]}" for id,category in enumerate(category_counter,start = 1)}
+    for id , category in cat_D.items():
+        print(f"{id}.{category}")
+    get_id = int(input('choose a category:  '))
+    print()
+    selected_cat =  cat_D[get_id].split(" ")[0]
+    print(f"list of {selected_cat} available: ")
+
+    wh1 = [ f"{item['state']} {item['category']}" 
+        for item in stock if item.get('warehouse') == 1 and item.get('category') == selected_cat]
+    wh2 = [ f"{item['state']} {item['category']}" for item in stock if item.get('warehouse') == 2 and item.get('category') == selected_cat]
+
+    print(len(set(wh1)))
+    print(len(set(wh2)))
+    print(list(zip(set(wh1), set(wh2))))
+    print(list(zip_longest(set(wh1), set(wh2), fillvalue=False)))
+
+    for item_wh1, item_wh2 in zip_longest(set(wh1), set(wh2), fillvalue=False):
+        if item_wh1: print(f"{item_wh1}, warehouse1")
+        if item_wh2: print(f"{item_wh2}, warehouse2")
+    print("Thank you for your visit",user_name+'!')
     
 
 
     
-        
+   #call all the menu's     
 if menu == 1:
     menu1()
 
 elif menu == 2:
     menu2()
 elif menu == 3:
-    search_category()
+    menu3()
     
 elif menu == 4:
     print('')
